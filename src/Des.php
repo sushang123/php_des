@@ -5,8 +5,8 @@ namespace Devil;
 /**
  * openssl 实现的 DES 加密类，支持各种 PHP 版本
  */
-class Des
-{
+class Des {
+
     /**
      * @var string $method 加解密方法，可通过 openssl_get_cipher_methods() 获得
      */
@@ -37,7 +37,6 @@ class Des
     const OUTPUT_BASE64 = 'base64';
     const OUTPUT_HEX = 'hex';
 
-
     /**
      * DES constructor.
      * @param string $key
@@ -54,17 +53,12 @@ class Des
      * @param string $iv
      * @param int $options
      */
-    public function __construct($key, $method = 'DES-CBC', $output = '', $iv = '', $options = OPENSSL_RAW_DATA | OPENSSL_NO_PADDING)
-    {
-		
-		$this->method = !empty($method)?$method:'DES-CBC';
-		if($this->method=='DES-CBC' && empty($iv)){
-			$this->iv = bin2hex(openssl_random_pseudo_bytes(4));
-		}else{
-			$this->iv = $iv;
-		}
+    public function __construct($key, $method = 'DES-ECB', $output = '', $iv = '', $options = OPENSSL_RAW_DATA | OPENSSL_NO_PADDING) {
+
+        $this->method = $method;
+        $this->iv = $iv;
         $this->key = $key;
-        $this->output = !empty($output)?$output:self::OUTPUT_BASE64;
+        $this->output = !empty($output) ? $output : self::OUTPUT_BASE64;
         $this->options = $options;
     }
 
@@ -74,8 +68,7 @@ class Des
      * @param $str
      * @return string
      */
-    public function encrypt($str)
-    {
+    public function encrypt($str) {
         $str = $this->pkcsPadding($str, 8);
         $sign = openssl_encrypt($str, $this->method, $this->key, $this->options, $this->iv);
 
@@ -84,7 +77,6 @@ class Des
         } else if ($this->output == self::OUTPUT_HEX) {
             $sign = bin2hex($sign);
         }
-
         return str_replace(array('+', '/', '='), array('-', '_', ''), $sign);
     }
 
@@ -94,9 +86,8 @@ class Des
      * @param $encrypted
      * @return string
      */
-    public function decrypt($encrypted)
-    {
-		$encrypted = str_replace(array('-', '_'), array('+', '/'), $encrypted);
+    public function decrypt($encrypted) {
+        $encrypted = str_replace(array('-', '_'), array('+', '/'), $encrypted);
         if ($this->output == self::OUTPUT_BASE64) {
             $encrypted = base64_decode($encrypted);
         } else if ($this->output == self::OUTPUT_HEX) {
@@ -116,8 +107,7 @@ class Des
      * @param $blocksize
      * @return string
      */
-    private function pkcsPadding($str, $blocksize)
-    {
+    private function pkcsPadding($str, $blocksize) {
         $pad = $blocksize - (strlen($str) % $blocksize);
         return $str . str_repeat(chr($pad), $pad);
     }
@@ -128,8 +118,7 @@ class Des
      * @param $str
      * @return string
      */
-    private function unPkcsPadding($str)
-    {
+    private function unPkcsPadding($str) {
         $pad = ord($str{strlen($str) - 1});
         if ($pad > strlen($str)) {
             return false;
@@ -138,5 +127,3 @@ class Des
     }
 
 }
-
-
