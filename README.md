@@ -13,27 +13,23 @@ include_once './vendor/autoload.php';
 
 use Devil\Des;
 
+//$iv = bin2hex(openssl_random_pseudo_bytes(4)); 可随机
+$iv = 'abc12345';
 $key = 'a123456';
 $arr = ['id'=>1,'name'=>'ceshi','title'=>'haha'];
 $val = json_encode($arr,JSON_UNESCAPED_UNICODE);
 
-//快捷用法(默认使用CBC模式，IV初始化向量随机更安全)
-$des = new Des($key);
-echo $base64Sign = $des->encrypt($val);
-echo "\n";
-echo $des->decrypt($base64Sign);
-echo "\n";
 
 
 // DES CBC 加解密（安全，速度慢）
-$des = new Des($key, 'DES-CBC', Des::OUTPUT_BASE64);
+$des = new Des($key, 'DES-CBC', Des::OUTPUT_BASE64,$iv);
 echo $base64Sign = $des->encrypt($val);
 echo "\n";
 echo $des->decrypt($base64Sign);
 echo "\n";
 
 // DES CBC 加解密（安全，速度慢）
-$des = new Des($key, 'DES-CBC', Des::OUTPUT_HEX);
+$des = new Des($key, 'DES-CBC', Des::OUTPUT_HEX,$iv);
 echo $base64Sign = $des->encrypt($val);
 echo "\n";
 echo $des->decrypt($base64Sign);
