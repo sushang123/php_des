@@ -1,0 +1,19 @@
+{
+    "name": "devilhot/des",
+    "description": "openssl_encrypt对称加解密",
+    "authors": [
+        {
+            "name": "devil"
+        }
+    ],
+    "minimum-stability": "dev",
+    "license": "MIT",
+    "require": {
+        "php": ">=5.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Devil\\": "src/"
+        }
+    }
+}
