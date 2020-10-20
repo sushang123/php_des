@@ -16,7 +16,6 @@ use Devil\Des;
 $key = 'a123456';
 $arr = ['id'=>1,'name'=>'ceshi','title'=>'haha'];
 $val = json_encode($arr,JSON_UNESCAPED_UNICODE);
-$val = '{"user_id":1,"user_level":1,"user_name":"admin","school_id":0,"login_school_id":933}';
 
 //快捷用法(默认使用CBC模式，IV初始化向量随机)
 $des = new Des($key);
