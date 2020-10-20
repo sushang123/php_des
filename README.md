@@ -14,7 +14,7 @@ include_once './vendor/autoload.php';
 use Devil\Des;
 
 //$iv = bin2hex(openssl_random_pseudo_bytes(4)); 可随机
-$iv = 'abc12345';
+$iv = 'abc12345';//只能是8位字符串
 $key = 'a123456';
 $arr = ['id'=>1,'name'=>'ceshi','title'=>'haha'];
 $val = json_encode($arr,JSON_UNESCAPED_UNICODE);
