@@ -17,7 +17,7 @@ $key = 'a123456';
 $arr = ['id'=>1,'name'=>'ceshi','title'=>'haha'];
 $val = json_encode($arr,JSON_UNESCAPED_UNICODE);
 
-//快捷用法(默认使用CBC模式，IV初始化向量随机)
+//快捷用法(默认使用CBC模式，IV初始化向量随机更安全)
 $des = new Des($key);
 echo $base64Sign = $des->encrypt($val);
 echo "\n";
