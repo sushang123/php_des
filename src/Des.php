@@ -51,9 +51,9 @@ class Des {
      *      base64、hex
      *
      * @param string $iv
-     * @param int $options
+     * @param int $options OPENSSL_RAW_DATA 或者 OPENSSL_NO_PADDING
      */
-    public function __construct($key, $method = 'DES-ECB', $output = '', $iv = '', $options = OPENSSL_RAW_DATA | OPENSSL_NO_PADDING) {
+    public function __construct($key, $method = 'DES-ECB', $output = '', $iv = '', $options = OPENSSL_RAW_DATA) {
 
         $this->method = $method;
         $this->iv = $iv;
